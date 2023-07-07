@@ -1,4 +1,5 @@
 from PIL import Image
+import numpy as np
 
 
 def cut_and_histogram(image: Image.Image, box: tuple) -> (Image.Image, list):
@@ -18,7 +19,17 @@ def resize_and_rotation(image: Image.Image, size: tuple, angle: int) -> Image.Im
 def getchannel_and_save(image: Image.Image, channel: int, filepath: str):
     assert (3 > channel) or (channel < 0), 'channel is 0 ~ 3'
     im = image.copy()
-    im = im.getchannel(channel)
+    r, g, b = im.split()
+    if channel == 0:
+        temp = r
+    elif channel == 1:
+        temp = g
+    elif channel == 2:
+        temp = b
+    array = np.asarray(temp)
+    empty_array = np.zeros((2160, 3840, 3))
+    empty_array[:, :, channel] = array
+    im = Image.fromarray(np.uint8(empty_array))
     im.save(filepath)
 
 

@@ -19,11 +19,11 @@ if __name__ == '__main__':
     print(histogram)
 
     # resize_and_rotation 테스트
-    image = library.resize_and_rotation(im, (1920, 1080), 180)
+    image = library.resize_and_rotation(im, (1920, 1080), 90)
     image.show()
 
     # getchannel_and_save 테스트
-    library.getchannel_and_save(im, 0, 'newjeans_gray.jpg')
+    library.getchannel_and_save(im, 2, 'newjeans_blue.jpg')
 
     # paste_and_entropy 테스트
     image, entropy = library.paste_and_entropy(im, (1920, 1080))
